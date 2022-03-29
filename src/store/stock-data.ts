@@ -11,7 +11,7 @@ class ExtendedHoursStore {
   }
 
   public all(): Promise<DailyData[]> {
-    return this.collection.all(true);
+    return this.collection.all(true, 'day', -1);
   }
 
   public findAllExistingDates(): Promise<string[]> {

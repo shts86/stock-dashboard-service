@@ -14,7 +14,7 @@ router.get(
   wrapAsyncAndSend((req, res) => {
     logger.info('get stock data: ' + req.params.stockCode);
 
-    return getStockData(req.params.stockCode, res);
+    return getStockData(req.params.stockCode.toUpperCase(), res);
   }),
 );
 

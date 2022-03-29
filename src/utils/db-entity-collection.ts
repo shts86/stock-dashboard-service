@@ -8,9 +8,12 @@ export interface DbEntity {
 export class DbEntityCollection<T extends DbEntity> {
   constructor(private readonly collection: mongodb.Collection) {}
 
-  public async all(stripObjectId = true): Promise<T[]> {
+  public async all(stripObjectId = true, sort: string | undefined = undefined, sortOrder: number = 1): Promise<T[]> {
     const projection = stripObjectId ? { _id: 0 } : undefined;
-    return await this.collection.find({}, { projection }).toArray();
+    return await this.collection
+      .find({}, { projection })
+      .sort(sort ? { [sort]: sortOrder } : {})
+      .toArray();
   }
 
   public async findAllExistingDates(stripObjectId = true): Promise<string[]> {

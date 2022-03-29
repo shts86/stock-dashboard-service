@@ -12,4 +12,5 @@ export const getStockData = async (stockCode?: string | null, res?: express.Resp
 
   const db = <mongodb.Db>getDb();
   const stockDataCollection = new stockCollection(db, stockCode);
+  return stockDataCollection.all();
 };

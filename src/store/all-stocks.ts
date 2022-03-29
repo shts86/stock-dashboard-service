@@ -11,7 +11,7 @@ class AllStocksStore {
   }
 
   public all(): Promise<Stock[]> {
-    return this.collection.all(true);
+    return this.collection.all(true, 'code');
   }
 
   public findByStockCode(code: string): Promise<Stock | null> {

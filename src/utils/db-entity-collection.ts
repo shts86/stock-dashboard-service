@@ -22,12 +22,12 @@ export class DbEntityCollection<T extends DbEntity> {
 
   public async findById(id: string | mongodb.ObjectID, stripObjectId = true): Promise<T | null> {
     const documentId = new mongodb.ObjectID(id);
-    return await this.findOne({ _id: documentId } as FilterQuery<DbEntity>, stripObjectId);
+    return await this.findOne({ _id: documentId } as FilterQuery<T>, stripObjectId);
   }
 
   public async findByStockCode(codeOriginal: string, stripObjectId = true): Promise<T | null> {
     const code = codeOriginal.toUpperCase();
-    return await this.findOne({ code } as FilterQuery<DbEntity>, stripObjectId);
+    return await this.findOne({ code } as FilterQuery<T>, stripObjectId);
   }
 
   public async findOne(filter: FilterQuery<T>, stripObjectId = true): Promise<T | null> {
